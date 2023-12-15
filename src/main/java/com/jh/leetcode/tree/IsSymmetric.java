@@ -3,6 +3,9 @@ package com.jh.leetcode.tree;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * 是否为镜像树
+ */
 public class IsSymmetric {
     public static boolean isSymmetric(TreeNode treeNode) {
 

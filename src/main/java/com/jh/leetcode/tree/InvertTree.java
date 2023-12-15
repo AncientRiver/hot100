@@ -1,5 +1,8 @@
 package com.jh.leetcode.tree;
 
+/**
+ * 反转树
+ */
 public class InvertTree {
     public TreeNode invertTree(TreeNode treeNode) {
         if (treeNode == null) return null;

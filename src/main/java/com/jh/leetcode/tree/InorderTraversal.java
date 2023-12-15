@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/*
-* 中序遍历
-* */
+
+/**
+ * 中序遍历
+ */
 public class InorderTraversal {
 
     public List<Integer> inorderTraversal(TreeNode root) {
