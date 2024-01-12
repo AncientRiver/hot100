@@ -8,11 +8,33 @@
     <artifactId>com.jh.leetcode</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <aviator.version>3.0.0</aviator.version>
+        <fastjson.version>1.2.70</fastjson.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>21.0</version>
+        </dependency>
+        <!-- 表达式解析引擎 -->
+        <dependency>
+            <groupId>com.googlecode.aviator</groupId>
+            <artifactId>aviator</artifactId>
+            <version>${aviator.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.20</version>
+        </dependency>
+        <!-- json -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
         </dependency>
     </dependencies>
     <build>
