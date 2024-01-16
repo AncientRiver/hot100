@@ -29,6 +29,6 @@ public class MaximumBags {
                 return i;
             }
         }
-        return 0;
+        return currentRest.length;
     }
 }

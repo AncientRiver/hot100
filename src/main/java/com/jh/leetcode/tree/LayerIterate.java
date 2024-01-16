@@ -1,7 +1,6 @@
 package com.jh.leetcode.tree;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * 层级遍历
@@ -10,28 +9,21 @@ public class LayerIterate {
 
 
     public static List<List<Integer>> layerIterate(TreeNode root) {
-        List<TreeNode> treeNodes = new ArrayList<>();
-        List<List<Integer>> result = new ArrayList<>();
+        List<List<Integer>> lists=new ArrayList<>();
         Queue<TreeNode> queue = new ArrayDeque<>();
-        if (root!=null){
-            result.add(new ArrayList<Integer>(){{add(root.val);}});
-            queue.offer(root);
-        }
-        while (!queue.isEmpty()) {
-            TreeNode treeNode = queue.poll();
-
-            if (treeNode.left != null) treeNodes.add(treeNode.left);
-            if (treeNode.right != null) treeNodes.add(treeNode.right);
-            if (queue.isEmpty()) {
-                queue.addAll(treeNodes);
-                List<Integer> copyList = treeNodes.stream().map(node -> node.val).collect(Collectors.toList());
-                if (!copyList.isEmpty()) {
-                    result.add(copyList);
-                }
-                treeNodes.clear();
+        queue.add(root);
+        while (!queue.isEmpty()){
+            int size = queue.size();
+            List<Integer> list=new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                list.add(node.val);
+                if (node.left!=null) queue.add(node.left);
+                if (node.right!=null) queue.add(node.right);
             }
+            lists.add(list);
         }
-        return result;
+        return lists;
     }
 
     public static void main(String[] args) {

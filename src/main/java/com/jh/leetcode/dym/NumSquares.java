@@ -13,44 +13,21 @@ import java.util.stream.Stream;
  */
 public class NumSquares {
     public static void main(String[] args) {
-        Scanner scanner=new Scanner(System.in);
-        while (scanner.hasNext()){
-            String next = scanner.next();
-        }
-
         int i = numSquares(2);
         System.out.println(i);
     }
 
+    //定义状态 dp[i]  d[n]为总数为n时的最少数量
+    //定义状态为 d(n)=min(d(n-a[i]）+1,d(n-a[i-1])+1，……,d(n-a[0])+1))
     public static int numSquares(int n) {
         //  从平方根取值开始计算
         int half = (int) Math.sqrt(n);
-
-        return numSquares(n, half);
-    }
-
-    /**
-     * 贪心法
-     */
-    private static int numSquares(int n, int num) {
-        int originSum = n;
-        int originHaf = num;
-        int i = 0;
-        while (n != 0) {
-            if (num!=1 && n % (num * num) == 0) {
-                return i + n % (num * num);
-            }
-            if (n - num * num >= 0) {
-                n -= num * num;
-                i++;
-            }
-            //如果num为0,说明没救了,重启,原来num-1来
-            if (--num == 0 && n != 0) {
-                n = originSum;
-                num = originHaf - 1;
-                i = 0;
-            }
+        //  构造备选结果
+        int[] nums =new int[half];
+        for (int i = 1; i <= nums.length; i++) {
+            nums[i]=i*i;
         }
-        return i;
+        return 0;
     }
+
 }
