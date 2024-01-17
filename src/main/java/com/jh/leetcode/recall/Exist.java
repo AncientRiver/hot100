@@ -14,61 +14,48 @@ public class Exist {
         int columnLength = board[0].length;
         char[] chars = word.toCharArray();
         if (chars.length > rowLength * columnLength) return false;
+        int[][] marked = new int[rowLength][columnLength];
         for (int i = 0; i < rowLength; i++) {
             for (int j = 0; j < columnLength; j++) {
-                int[][] marked = new int[rowLength][columnLength];
-                if (findWord(board, marked, i, j, chars, 0)) {
-                    return true;
+                //如果首字母相同才进行查找
+                if (word.charAt(0) == board[i][j]) {
+                    if (word.length()==1 &&word.length()==board.length*board[0].length)return true;
+                    if (findWord(board, marked, i, j, chars, 0)) {
+                        return true;
+                    }
+                    
                 }
             }
         }
         return false;
     }
 
-    public boolean findWord(char[][] board,int[][] marked,int row, int column, char[] chars, int index) {
-//        System.out.println(board[originRow][originColumn]+"==>"+board[row][column]);
-        int rowLength = board.length;
-        int columnLength = board[0].length;
-        //如果存在相同的情况，那么将上下左右搜索
+    public boolean findWord(char[][] board, int[][] marked, int row, int column, char[] chars, int index) {
+        // 越界肯定不行
+        if (row < 0 || column < 0 || row >= board.length || column >= board[0].length) return false;
+        // 使用过了肯定不行
+        if (marked[row][column] == 1) return false;
+        //如果相同,标记下一个
         if (board[row][column] == chars[index]) {
-            marked[row][column]=1;
-            //如果是最后一个，那么说明能找到
-            if (index == chars.length - 1) return true;
-            //不在最上方且原来的row不在上方，对上进行搜索
-            if (row - 1 >= 0 && marked [row - 1][column]!=1) {
-                int[][] ints = Arrays.copyOf(marked, rowLength);
-                boolean flag = findWord(board, ints, row - 1, column, chars, index + 1);
-                if (flag) return true;
+            if (index==chars.length-1)return true;
+            marked[row][column] = 1;
+            if (findWord(board, marked, row - 1, column, chars, index + 1) ||
+                    findWord(board, marked, row, column - 1, chars, index + 1) ||
+                    findWord(board, marked, row + 1, column, chars, index + 1) ||
+                    findWord(board, marked, row, column + 1, chars, index + 1)) {
+                return true;
             }
-            //下
-            if (row + 1 < rowLength && marked [row + 1][column]!=1) {
-                int[][] ints = Arrays.copyOf(marked, rowLength);
-                boolean flag = findWord(board, ints, row + 1, column, chars, index + 1);
-                if (flag) return true;
-            }
-            //左
-            if (column - 1 >= 0 && marked[row ][column-1]!=1) {
-                int[][] ints = Arrays.copyOf(marked, rowLength);
-                boolean flag = findWord(board, ints, row, column - 1, chars, index + 1);
-                if (flag) return true;
-            }
-            //右
-            if (column + 1 < columnLength && marked[row ][column+1]!=1) {
-                int[][] ints = Arrays.copyOf(marked, rowLength);
-                boolean flag = findWord(board, ints, row, column + 1, chars, index + 1);
-                if (flag) return true;
-            }
+            marked[row][column] = 0;
         }
-        //如果不同，说明该搜索路径是错误的
         return false;
-
     }
 
 
     public static void main(String[] args) {
-        char [][]board={{'A','B','C','E'},{'S','F','E','S'},{'A','D','E','E'}};
+        char[][] board = {{'a', 'a'}};
+//        char[][] board = {{'A'}};
 //        char[][] board = {{'a', 'a', 'a', 'a'}, {'a', 'a', 'a', 'a'}, {'a', 'a', 'a', 'a'}};
-        String str = "ABCESEEEFS";
+        String str = "aa";
         System.out.println(new Exist().exist(board, str));
     }
 }
