@@ -8,6 +8,7 @@ package com.jh.leetcode.string;
  * 若不存在任何重复字符子串，则返回 0。
  */
 public class LongestDupSubstring {
+
     public static String longestDupSubstring(String s) {
         String longestStr = "";
         for (int i = 0; i < s.length(); i++) {
@@ -22,6 +23,24 @@ public class LongestDupSubstring {
         }
         return longestStr;
     }
+
+/*
+    //该算法在递归过程中会超时
+    public static String longestDupSubstring(String s) {
+        String longestStr = "";
+        for (int i = 0; i < s.length(); i++) {
+            for (int j = 1; j <= (s.length() - i) / 2; j++) {
+                if (s.substring(i, j + i).equals(s.substring(j + i, i + 2 * j))) {
+                    String substring = s.substring(i, i + 2 * j);
+                    if (substring.length() > longestStr.length()) {
+                        longestStr = substring;
+                    }
+                }
+            }
+        }
+        return longestStr;
+    }
+*/
 
     public static void main(String[] args) {
         String abab = longestDupSubstring("ababc");

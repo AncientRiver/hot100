@@ -1,8 +1,7 @@
-package com.jh.leetcode.recall;
+package com.jh.leetcode.backtrack;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * 全排列问题

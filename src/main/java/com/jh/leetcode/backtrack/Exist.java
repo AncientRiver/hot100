@@ -1,7 +1,5 @@
-package com.jh.leetcode.recall;
+package com.jh.leetcode.backtrack;
 
-
-import java.util.Arrays;
 
 /**
  * 单词搜索
